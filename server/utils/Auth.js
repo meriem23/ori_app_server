@@ -94,8 +94,27 @@ const validateEmail = async (email) => {
 // passport middleware
 const userAuth = passport.authenticate("jwt", { session: false });
 
+// check role middleware
+const checkRole = (roles) => (req, res, next) =>
+  !roles.includes(req.user.role)
+    ? res.status(401).json("Unauthorized")
+    : next();
+
+// not showing password
+const serializeUser = (user) => {
+  return {
+    email: user.email,
+    _id: user._id,
+    name: user.name,
+    updatedAt: user.updatedAt,
+    createdAt: user.createdAt,
+  };
+};
+
 module.exports = {
   userRegister,
   userLogin,
   userAuth,
+  serializeUser,
+  checkRole,
 };
