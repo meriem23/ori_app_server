@@ -6,8 +6,14 @@ const IngredientSchema = new Schema(
       type: String,
       required: true,
     },
+    components: [
+      {
+        compName: String,
+        compValue: String,
+      },
+    ],
   },
   { timestamps: true }
 );
 
-module.exports = model("ingredients", IngredientSchema);
+module.exports = model("ingredient", IngredientSchema);
