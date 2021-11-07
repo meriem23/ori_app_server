@@ -6,8 +6,12 @@ const FamSchema = new Schema(
       type: String,
       required: true,
     },
+    description: {
+      type: String,
+      required: true,
+    },
   },
   { timestamps: true }
 );
 
-module.exports = model("families", FamSchema);
+module.exports = model("family", FamSchema);
