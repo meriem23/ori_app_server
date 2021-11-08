@@ -1,6 +1,5 @@
-const { Schema, model } = require("mongoose");
-
-const FamSchema = new Schema(
+const mongoose = require("mongoose");
+const FamSchema = mongoose.Schema(
   {
     name: {
       type: String,
@@ -10,8 +9,13 @@ const FamSchema = new Schema(
       type: String,
       required: true,
     },
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "user",
+      required: true,
+    },
   },
   { timestamps: true }
 );
 
-module.exports = model("family", FamSchema);
+module.exports = mongoose.model("family", FamSchema);

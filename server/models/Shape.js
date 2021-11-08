@@ -1,13 +1,22 @@
-const { Schema, model } = require("mongoose");
+const mongoose = require("mongoose");
 
-const ShapeSchema = new Schema(
+const ShapeSchema = mongoose.Schema(
   {
     name: {
       type: String,
+      required: true,
+    },
+    description: {
+      type: String,
+      required: true,
+    },
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "user",
       required: true,
     },
   },
   { timestamps: true }
 );
 
-module.exports = model("shape", ShapeSchema);
+module.exports = mongoose.model("shape", ShapeSchema);

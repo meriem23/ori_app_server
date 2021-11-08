@@ -1,6 +1,6 @@
-const { Schema, model } = require("mongoose");
+const mongoose = require("mongoose");
 
-const ingredientStockSchema = new Schema(
+const ingredientStockSchema = mongoose.Schema(
   {
     idSupplier: {
       type: mongoose.Schema.Types.ObjectId,
@@ -20,8 +20,13 @@ const ingredientStockSchema = new Schema(
       type: String,
       required: true,
     },
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "user",
+      required: true,
+    },
   },
   { timestamps: true }
 );
 
-module.exports = model("ingredientStock", ingredientStockSchema);
+module.exports = mongoose.model("ingredientStock", ingredientStockSchema);

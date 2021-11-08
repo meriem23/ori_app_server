@@ -1,6 +1,6 @@
-const { Schema, model } = require("mongoose");
+const mongoose = require("mongoose");
 
-const RecipeSchema = new Schema(
+const RecipeSchema = mongoose.Schema(
   {
     name: {
       type: String,
@@ -10,7 +10,7 @@ const RecipeSchema = new Schema(
       type: String,
       required: true,
     },
-    userId: {
+    user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "user",
       required: true,
@@ -19,4 +19,4 @@ const RecipeSchema = new Schema(
   { timestamps: true }
 );
 
-module.exports = model("recipe", RecipeSchema);
+module.exports = mongoose.model("recipe", RecipeSchema);

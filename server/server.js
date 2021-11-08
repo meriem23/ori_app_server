@@ -19,6 +19,9 @@ app.use(passport.initialize());
 require("./middlewares/passport")(passport);
 //User Router middleware
 app.use("/api/users", require("./routes/users"));
+app.use("/api/family", require("./routes/family"));
+app.use("/api/shape", require("./routes/shape"));
+app.use("/api/supplier", require("./routes/supplier"));
 
 //Creating Server
 app.listen(PORT, () =>
