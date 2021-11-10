@@ -58,7 +58,7 @@ router.delete("/:id", (req, res) => {
       if (!supplier) {
         return res.status(404).json({ msg: "Supplier not found" });
       } else {
-        Supplier.findByIdAndDelete((err, data) => {
+        Supplier.findByIdAndDelete(req.params.id, (err, data) => {
           res.json({ msg: "Supplier deleted" });
         });
       }

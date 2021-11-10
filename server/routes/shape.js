@@ -54,11 +54,6 @@ router.delete("/:id", (req, res) => {
     .then((shape) => {
       if (!shape) {
         return res.status(404).json({ msg: "Shape not found" });
-      } else if (shape.user.toString() !== req.user.id) {
-        res.status(401).json({
-          message: "Not authorized",
-          success: false,
-        });
       } else {
         Shape.findByIdAndDelete(req.params.id, (err, data) => {
           res.json({ msg: "Shape deleted" });

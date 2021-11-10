@@ -54,12 +54,14 @@ router.delete("/:id", (req, res) => {
     .then((family) => {
       if (!family) {
         return res.status(404).json({ msg: "Family not found" });
-      } else if (family.user.toString() !== req.user.id) {
-        res.status(401).json({
-          message: "Not authorized",
-          success: false,
-        });
-      } else {
+      }
+      // else if (family.user.toString() !== req.user.id) {
+      //   res.status(401).json({
+      //     message: "Not authorized",
+      //     success: false,
+      //   });
+      // }
+      else {
         Family.findByIdAndDelete(req.params.id, (err, data) => {
           res.json({ msg: "Family deleted" });
         });
