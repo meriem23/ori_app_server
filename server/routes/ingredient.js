@@ -2,6 +2,8 @@ const express = require("express");
 const { body, validationResult } = require("express-validator");
 const router = express.Router();
 const Ingredient = require("../models/Ingredient");
+const Family = require("../models/Family");
+const Shape = require("../models/Shape");
 const { userAuth } = require("../utils/Auth");
 
 /* Private Routes */
@@ -9,6 +11,8 @@ const { userAuth } = require("../utils/Auth");
 //Get list of ingredients
 router.get("/", (req, res) => {
   Ingredient.find()
+    .populate("family")
+    .populate("shape")
     .sort({ date: -1 })
     .then((ingredients) => res.status(201).send(ingredients))
     .catch((err) =>
@@ -26,8 +30,8 @@ router.post(
     userAuth,
     [
       body("name", "Ingredient Name is required").notEmpty(),
-      body("familyType", "Family type is required").notEmpty(),
-      body("shapeType", "Shape type is required").notEmpty(),
+      body("family", "Family type is required").notEmpty(),
+      body("shape", "Shape type is required").notEmpty(),
     ],
   ],
   (req, res) => {
@@ -38,17 +42,21 @@ router.post(
         success: false,
       });
     }
-    const { name, family, shape, components } = req.body;
+    const { name, family, shape } = req.body;
     const newIngredient = new Ingredient({
       name,
-      familyType,
-      shapeType,
-      //components,
+      family: req.body.family,
+      shape: req.body.shape,
       user: req.user.id,
     });
     newIngredient
       .save()
-      .then((ingredient) => res.status(201).send(ingredient))
+      .then((ingredient) =>
+        res.status(200).json({
+          message: "Ingredient created",
+          success: true,
+        })
+      )
       .catch((err) =>
         res.status(500).json({
           message: "Can't create this ingredient",
