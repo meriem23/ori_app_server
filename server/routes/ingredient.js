@@ -72,7 +72,7 @@ router.delete("/:id", (req, res) => {
       if (!ingredient) {
         return res.status(404).json({ msg: "Ingredient not found" });
       } else {
-        Family.findByIdAndDelete(req.params.id, (err, data) => {
+        Ingredient.findByIdAndDelete(req.params.id, (err, data) => {
           res.json({ msg: "Ingredient deleted" });
         });
       }
