@@ -21,7 +21,7 @@ router.get("/", (req, res) => {
     );
 });
 
-//Post an ingredient
+//Post a stock
 router.post(
   "/",
   [
