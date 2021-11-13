@@ -23,6 +23,7 @@ app.use("/api/family", require("./routes/family"));
 app.use("/api/shape", require("./routes/shape"));
 app.use("/api/supplier", require("./routes/supplier"));
 app.use("/api/ingredient", require("./routes/ingredient"));
+app.use("/api/stock", require("./routes/stock"));
 
 //Creating Server
 app.listen(PORT, () =>
