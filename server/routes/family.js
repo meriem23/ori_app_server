@@ -7,8 +7,9 @@ const { userAuth } = require("../utils/Auth");
 /* Private Routes */
 
 //Get list of families
-router.get("/", userAuth, (req, res) => {
-  Family.find({ user: req.user.id })
+router.get("/", (req, res) => {
+  Family.find()
+    .populate("ingredient")
     .sort({ date: -1 })
     .then((families) => res.status(201).send(families))
     .catch((err) =>

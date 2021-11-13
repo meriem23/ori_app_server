@@ -7,8 +7,9 @@ const { userAuth } = require("../utils/Auth");
 /* Private Routes */
 
 //Get list of shapes
-router.get("/", userAuth, (req, res) => {
-  Shape.find({ user: req.user.id })
+router.get("/", (req, res) => {
+  Shape.find()
+    .populate("ingredient")
     .sort({ date: -1 })
     .then((shapes) => res.status(201).send(shapes))
     .catch((err) =>
