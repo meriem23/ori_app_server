@@ -22,6 +22,7 @@ app.use("/api/users", require("./routes/users"));
 app.use("/api/family", require("./routes/family"));
 app.use("/api/shape", require("./routes/shape"));
 app.use("/api/supplier", require("./routes/supplier"));
+app.use("/api/ingredient", require("./routes/ingredient"));
 
 //Creating Server
 app.listen(PORT, () =>

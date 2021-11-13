@@ -12,6 +12,24 @@ const IngredientSchema = mongoose.Schema(
         compValue: String,
       },
     ],
+    familyType: {
+      type: String,
+      required: true,
+    },
+    shapeType: {
+      type: String,
+      required: true,
+    },
+    family: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "family",
+      required: true,
+    },
+    shape: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "shape",
+      required: true,
+    },
     user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "user",

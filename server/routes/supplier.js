@@ -8,6 +8,7 @@ const Supplier = require("../models/Supplier");
 //Get list of suppliers
 router.get("/", (req, res) => {
   Supplier.find()
+    .populate("ingredient")
     .sort({ date: -1 })
     .then((suppliers) => res.status(201).send(suppliers))
     .catch((err) =>
