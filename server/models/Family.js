@@ -14,6 +14,11 @@ const FamSchema = mongoose.Schema(
       ref: "user",
       required: true,
     },
+    ingredient: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "ingredient",
+      required: true,
+    },
   },
   { timestamps: true }
 );
