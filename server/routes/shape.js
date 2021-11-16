@@ -9,7 +9,6 @@ const { userAuth } = require("../utils/Auth");
 //Get list of shapes
 router.get("/", (req, res) => {
   Shape.find()
-    .populate("ingredient")
     .sort({ date: -1 })
     .then((shapes) => res.status(201).send(shapes))
     .catch((err) =>
