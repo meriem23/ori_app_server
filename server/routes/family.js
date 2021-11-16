@@ -9,7 +9,6 @@ const { userAuth } = require("../utils/Auth");
 //Get list of families
 router.get("/", (req, res) => {
   Family.find()
-    .populate("ingredient")
     .sort({ date: -1 })
     .then((families) => res.status(201).send(families))
     .catch((err) =>
