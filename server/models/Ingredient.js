@@ -6,12 +6,18 @@ const IngredientSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-    // components: [
-    //   {
-    //     compName: String,
-    //     compValue: String,
-    //   },
-    // ],
+    fact: [
+      {
+        fact__label: {
+          type: String,
+          required: true,
+        },
+        fact__quantity: {
+          type: String,
+          required: true,
+        },
+      },
+    ],
     family: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "family",
