@@ -25,11 +25,11 @@ router.get("/", (req, res) => {
 
 //Get one ingredient
 router.get("/:ingredientID", (req, res) => {
-  const ingredientID = req.params.id;
-  Ingredient.findOne(ingredientID)
+  const ingredientID = req.params.ingredientID;
+  console.log(ingredientID);
+  Ingredient.findOne({ _id: ingredientID })
     .populate("family")
     .populate("shape")
-    .sort({ date: -1 })
     .then((ingredients) => res.status(201).send(ingredients))
     .catch((err) =>
       res.status(400).json({
