@@ -21,8 +21,9 @@ require("./middlewares/passport")(passport);
 app.use("/api/users", require("./routes/users"));
 app.use("/api/family", require("./routes/family"));
 app.use("/api/shape", require("./routes/shape"));
-app.use("/api/supplier", require("./routes/supplier"));
 app.use("/api/ingredient", require("./routes/ingredient"));
+app.use("/api/recipe", require("./routes/recipe"));
+app.use("/api/supplier", require("./routes/supplier"));
 app.use("/api/stocks", require("./routes/stock"));
 
 //Creating Server

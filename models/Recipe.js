@@ -10,7 +10,18 @@ const RecipeSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-
+    ingredients: [
+      {
+        ingredient__label: {
+          type: String,
+          required: true,
+        },
+        ingredient__quantity: {
+          type: String,
+          required: true,
+        },
+      },
+    ],
     user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "user",

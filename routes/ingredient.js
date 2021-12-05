@@ -26,7 +26,7 @@ router.get("/", (req, res) => {
 //Get one ingredient
 router.get("/:ingredientID", (req, res) => {
   const ingredientID = req.params.id;
-  Ingredient.find(ingredientID)
+  Ingredient.findById(ingredientID)
     .populate("family")
     .populate("shape")
     .sort({ date: -1 })
@@ -103,12 +103,12 @@ router.delete("/:id", (req, res) => {
 });
 //Put an ingredient
 router.put("/:id", userAuth, (req, res) => {
-  const { name, family, shape, components } = req.body;
+  const { name, family, shape, fact } = req.body;
   let ingredientField = {};
   if (name) ingredientField.name = name;
   if (family) ingredientField.familyType = familyType;
   if (shape) ingredientField.shapeType = shapeType;
-  if (components) ingredientField.components = components;
+  if (fact) ingredientField.fact = fact;
   Ingredient.findById(req.params.id).then((ingredient) => {
     if (!ingredient) {
       return res.status(404).json({ msg: "Ingredient not found" });
