@@ -23,6 +23,23 @@ router.get("/", (req, res) => {
     );
 });
 
+//Get one ingredient
+router.get("/:ingredientID", (req, res) => {
+  const ingredientID = req.params.id;
+  console.log(ingredientID);
+  Ingredient.find(ingredientID)
+    .populate("family")
+    .populate("shape")
+    .sort({ date: -1 })
+    .then((ingredients) => res.status(201).send(ingredients))
+    .catch((err) =>
+      res.status(400).json({
+        message: "Can't get the ingredient",
+        success: false,
+      })
+    );
+});
+
 //Post an ingredient
 router.post(
   "/",
