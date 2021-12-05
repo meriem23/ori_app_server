@@ -26,7 +26,7 @@ router.get("/", (req, res) => {
 //Get one ingredient
 router.get("/:ingredientID", (req, res) => {
   const ingredientID = req.params.id;
-  Ingredient.findById(ingredientID)
+  Ingredient.findOne(ingredientID)
     .populate("family")
     .populate("shape")
     .sort({ date: -1 })
