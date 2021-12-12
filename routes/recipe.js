@@ -42,7 +42,7 @@ router.post(
     userAuth,
     [
       body("name", "Recipe Name is required").notEmpty(),
-      body("description", "Description is required").notEmpty(),
+      body("instructions", "Recipe instructions are required").notEmpty(),
     ],
   ],
   (req, res) => {
@@ -53,11 +53,11 @@ router.post(
         success: false,
       });
     }
-    const { name, description, ingredients } = req.body;
+    const { name, instructions, ingredients } = req.body;
     const newRecipe = new Ingredient({
       name,
       ingredients: req.body.ingredients,
-      description: req.body.description,
+      instructions: req.body.instructions,
       user: req.user.id,
     });
     newRecipe
@@ -97,10 +97,10 @@ router.delete("/:id", (req, res) => {
 });
 //Put a recipe
 router.put("/:id", userAuth, (req, res) => {
-  const { name, description, ingredients } = req.body;
+  const { name, instructions, ingredients } = req.body;
   let recipeField = {};
   if (name) recipeField.name = name;
-  if (description) recipeField.description = description;
+  if (instructions) recipeField.instructions = instructions;
   if (ingredients) recipeField.ingredients = ingredients;
   Recipe.findById(req.params.id).then((recipe) => {
     if (!recipe) {
