@@ -40,10 +40,10 @@ router.post(
   "/",
   [
     userAuth,
-    [
-      body("name", "Recipe Name is required").notEmpty(),
-      body("instructions", "Recipe instructions are required").notEmpty(),
-    ],
+    // [
+    //   body("name", "Recipe Name is required").notEmpty(),
+    //   body("instructions", "Recipe instructions are required").notEmpty(),
+    // ],
   ],
   (req, res) => {
     const errors = validationResult(req);
@@ -54,7 +54,7 @@ router.post(
       });
     }
     const { name, instructions, ingredients } = req.body;
-    const newRecipe = new Ingredient({
+    const newRecipe = new Recipe({
       name,
       ingredients: req.body.ingredients,
       instructions: req.body.instructions,
