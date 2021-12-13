@@ -23,9 +23,8 @@ router.get("/", (req, res) => {
 //Get one recipe
 router.get("/:recipeID", (req, res) => {
   const recipeID = req.params.id;
-  Recipe.find(recipeID)
+  Recipe.findOne({ _id: recipeID })
     .populate("ingredient")
-    .sort({ date: -1 })
     .then((recipes) => res.status(201).send(recipes))
     .catch((err) =>
       res.status(400).json({

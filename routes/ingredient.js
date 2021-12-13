@@ -26,7 +26,6 @@ router.get("/", (req, res) => {
 //Get one ingredient
 router.get("/:ingredientID", (req, res) => {
   const ingredientID = req.params.ingredientID;
-  console.log(ingredientID);
   Ingredient.findOne({ _id: ingredientID })
     .populate("family")
     .populate("shape")
