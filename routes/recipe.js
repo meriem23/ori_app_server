@@ -9,7 +9,7 @@ const { userAuth } = require("../utils/Auth");
 //Get list of recips
 router.get("/", (req, res) => {
   Recipe.find()
-    .populate("ingredient")
+    .populate("ingredients")
     .sort({ date: -1 })
     .then((recipes) => res.status(201).send(recipes))
     .catch((err) =>
@@ -24,7 +24,7 @@ router.get("/", (req, res) => {
 router.get("/:recipeID", (req, res) => {
   const recipeID = req.params.id;
   Recipe.findOne({ _id: recipeID })
-    .populate("ingredient")
+    .populate("ingredients")
     .then((recipes) => res.status(201).send(recipes))
     .catch((err) =>
       res.status(400).json({
@@ -68,10 +68,13 @@ router.post(
         })
       )
       .catch((err) =>
-        res.status(500).json({
-          message: "Can't create this recipe",
-          success: false,
-        })
+        res.status(500).json(
+          {
+            message: "Can't create this recipe",
+            success: false,
+          },
+          console.log(err)
+        )
       );
   }
 );
