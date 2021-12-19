@@ -23,6 +23,22 @@ router.get("/", (req, res) => {
     );
 });
 
+//search list of ingredients
+router.get("/search/:family/:shape", (req, res) => {
+  const { family, shape } = req.params;
+  Ingredient.find({ family, shape })
+    .populate("family")
+    .sort({ date: -1 })
+    .then((ingredients) => res.status(201).send(ingredients))
+    .catch((err) =>
+      res.status(400).json({
+        message: "Can't get the list of ingredients",
+        success: false,
+        err,
+      })
+    );
+});
+
 //Get one ingredient
 router.get("/:ingredientID", (req, res) => {
   const ingredientID = req.params.ingredientID;

@@ -8,15 +8,17 @@ const RecipeSchema = mongoose.Schema(
     },
     ingredients: [
       {
-        ingredient__shape: {
-          type: String,
+        shape: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "shape",
           required: true,
         },
-        ingredient__label: {
-          type: String,
+        ingredient: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "ingredient",
           required: true,
         },
-        ingredient__quantity: {
+        quantity: {
           type: String,
           required: true,
         },

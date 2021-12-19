@@ -9,13 +9,27 @@ const { userAuth } = require("../utils/Auth");
 //Get list of recips
 router.get("/", (req, res) => {
   Recipe.find()
-    .populate("ingredients")
+    .populate({
+      path: "ingredients",
+      populate: {
+        path: "shape",
+        model: "shape",
+      },
+    })
+    .populate({
+      path: "ingredients",
+      populate: {
+        path: "ingredient",
+        model: "ingredient",
+      },
+    })
     .sort({ date: -1 })
     .then((recipes) => res.status(201).send(recipes))
     .catch((err) =>
       res.status(400).json({
         message: "Can't get the list of recipes",
         success: false,
+        err,
       })
     );
 });
@@ -24,12 +38,26 @@ router.get("/", (req, res) => {
 router.get("/:recipeID", (req, res) => {
   const recipeID = req.params.id;
   Recipe.findOne({ _id: recipeID })
-    .populate("ingredients")
-    .then((recipes) => res.status(201).send(recipes))
+    .populate({
+      path: "ingredients",
+      populate: {
+        path: "shape",
+        model: "shape",
+      },
+    })
+    .populate({
+      path: "ingredients",
+      populate: {
+        path: "ingredient",
+        model: "ingredient",
+      },
+    })
+    .then((recipe) => res.status(201).send(recipe))
     .catch((err) =>
       res.status(400).json({
         message: "Can't get the recipe",
         success: false,
+        err,
       })
     );
 });
