@@ -7,8 +7,16 @@ const FamSchema = mongoose.Schema(
     },
     description: {
       type: String,
-      required: true,
+      required: false,
     },
+    shapes: [
+      {
+        shape__id: {
+          type: String,
+          required: false,
+        },
+      },
+    ],
     user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "user",

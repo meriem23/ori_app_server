@@ -68,7 +68,7 @@ router.post(
         })
       )
       .catch((err) =>
-        res.status(500).json(
+        res.status(501).json(
           {
             message: "Can't create this recipe",
             success: false,

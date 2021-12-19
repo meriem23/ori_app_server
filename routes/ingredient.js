@@ -12,7 +12,6 @@ const { userAuth } = require("../utils/Auth");
 router.get("/", (req, res) => {
   Ingredient.find()
     .populate("family")
-    .populate("shape")
     .sort({ date: -1 })
     .then((ingredients) => res.status(201).send(ingredients))
     .catch((err) =>
@@ -28,7 +27,6 @@ router.get("/:ingredientID", (req, res) => {
   const ingredientID = req.params.ingredientID;
   Ingredient.findOne({ _id: ingredientID })
     .populate("family")
-    .populate("shape")
     .then((ingredients) => res.status(201).send(ingredients))
     .catch((err) =>
       res.status(400).json({
@@ -45,8 +43,8 @@ router.post(
     userAuth,
     [
       body("name", "Ingredient Name is required").notEmpty(),
-      body("family", "Family type is required").notEmpty(),
-      body("shape", "Shape type is required").notEmpty(),
+      // body("family", "Family type is required").notEmpty(),
+      // body("shapes", "Shape type is required").notEmpty(),
     ],
   ],
   (req, res) => {
@@ -57,12 +55,12 @@ router.post(
         success: false,
       });
     }
-    const { name, family, shape, fact } = req.body;
+    const { name, family, shapes, fact } = req.body;
     const newIngredient = new Ingredient({
       name,
       fact: req.body.fact,
       family: req.body.family,
-      shape: req.body.shape,
+      shapes: req.body.shapes,
       user: req.user.id,
     });
     newIngredient

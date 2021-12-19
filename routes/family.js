@@ -9,6 +9,7 @@ const { userAuth } = require("../utils/Auth");
 //Get list of families
 router.get("/", (req, res) => {
   Family.find()
+    .populate("shape")
     .sort({ date: -1 })
     .then((families) => res.status(201).send(families))
     .catch((err) =>
@@ -18,7 +19,19 @@ router.get("/", (req, res) => {
       })
     );
 });
-
+//Get One Family
+router.get("/:familyID", (req, res) => {
+  const familyID = req.params.familyID;
+  Family.findOne({ _id: familyID })
+    .populate("shape")
+    .then((family) => res.status(201).send(family))
+    .catch((err) =>
+      res.status(400).json({
+        message: "Can't get the family",
+        success: false,
+      })
+    );
+});
 //Post a family
 router.post(
   "/",
@@ -31,10 +44,11 @@ router.post(
         success: false,
       });
     }
-    const { name, description } = req.body;
+    const { name, description, shapes } = req.body;
     const newFamily = new Family({
       name,
       description,
+      shapes: req.body.shapes,
       user: req.user.id,
     });
     newFamily

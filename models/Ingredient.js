@@ -23,11 +23,19 @@ const IngredientSchema = mongoose.Schema(
       ref: "family",
       required: true,
     },
-    shape: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "shape",
-      required: true,
-    },
+    shapes: [
+      {
+        shape__id: {
+          type: String,
+          required: false,
+        },
+      },
+    ],
+    // shape: {
+    //   type: mongoose.Schema.Types.ObjectId,
+    //   ref: "shape",
+    //   required: true,
+    // },
     user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "user",
