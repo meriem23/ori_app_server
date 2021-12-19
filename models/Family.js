@@ -11,7 +11,8 @@ const FamSchema = mongoose.Schema(
     },
     shapes: [
       {
-        type: String,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "shape",
       },
     ],
     user: {

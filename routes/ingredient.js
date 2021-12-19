@@ -18,6 +18,7 @@ router.get("/", (req, res) => {
       res.status(400).json({
         message: "Can't get the list of ingredients",
         success: false,
+        err,
       })
     );
 });
