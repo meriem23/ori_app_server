@@ -11,10 +11,7 @@ const FamSchema = mongoose.Schema(
     },
     shapes: [
       {
-        shape__id: {
-          type: String,
-          required: false,
-        },
+        type: String,
       },
     ],
     user: {
