@@ -23,6 +23,7 @@ app.use("/api/family", require("./routes/family"));
 app.use("/api/shape", require("./routes/shape"));
 app.use("/api/ingredient", require("./routes/ingredient"));
 app.use("/api/recipe", require("./routes/recipe"));
+app.use("/api/categories", require("./routes/categories"));
 app.use("/api/supplier", require("./routes/supplier"));
 app.use("/api/stocks", require("./routes/stock"));
 

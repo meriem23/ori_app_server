@@ -120,18 +120,20 @@ router.put("/:id", userAuth, (req, res) => {
   const { name, family, shape, fact } = req.body;
   let ingredientField = {};
   if (name) ingredientField.name = name;
-  if (family) ingredientField.familyType = familyType;
-  if (shape) ingredientField.shapeType = shapeType;
+  if (family) ingredientField.family = family;
+  if (shape) ingredientField.shape = shape;
   if (fact) ingredientField.fact = fact;
   Ingredient.findById(req.params.id).then((ingredient) => {
     if (!ingredient) {
       return res.status(404).json({ msg: "Ingredient not found" });
-    } else if (ingredient.user.toString() !== req.user.id) {
-      res.status(401).json({
-        message: "Not authorized",
-        success: false,
-      });
-    } else {
+    }
+    // else if (ingredient.user.toString() !== req.user.id) {
+    //   res.status(401).json({
+    //     message: "Not authorized",
+    //     success: false,
+    //   });
+    // } 
+    else {
       Ingredient.findByIdAndUpdate(
         req.params.id,
         { $set: ingredientField },
